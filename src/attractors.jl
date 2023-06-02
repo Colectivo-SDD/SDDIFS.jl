@@ -6,7 +6,7 @@ given a rectangulr region.
 function matrixattractor(ifs::AbstractVector{<:Function}, xs::AbstractVector{<:Real}, ys::AbstractVector{<:Real};
   weights::AbstractVector{<:Real} = Float64[], seed = nothing,
   preiterations::Int = 100, iterations::Int = 10000, 
-  rot90::Bool = false, value::Function = k -> k)
+  rot90::Bool = false, value::Function = k::Int -> k)
 
   # Cheking weights (probabilites) array
   if length(weights) > 0
@@ -61,11 +61,13 @@ function imgattractor(ifs::AbstractVector{<:Function}, xs::AbstractVector{<:Real
   colormap::Union{Symbol, Vector{<:Colorant}} = :viridis)
 
   cm = typeof(colormap) == Symbol ? colorschemes[colormap] : ColorScheme(colormap)
-  numcolors = length(ifs)
-    
+  nfs = length(ifs)
+  colors = [ cm[k/nfs] for k in 0:nfs ]
+
   matrixattractor(ifs, xs, ys, weights = weights, seed = seed,
     iterations = iterations, preiterations = preiterations,
-    value = k -> cm[k/numcolors], rot90 = true)
+    #value = k -> cm[k/numcolors], rot90 = true)
+    value = k::Int -> colors[k+1], rot90 = true)
 end
 
 
