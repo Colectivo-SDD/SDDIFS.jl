@@ -1,7 +1,7 @@
 
 """
 Implementation of the "Chaos Game" algorithm to "draw" an IFS attractor in a matrix,
-given a rectangulr region.
+given a rectangular region.
 """
 function matrixattractor(ifs::AbstractVector{<:Function}, xs::AbstractVector{<:Real}, ys::AbstractVector{<:Real};
   weights::AbstractVector{<:Real} = Float64[], seed = nothing,
@@ -11,7 +11,7 @@ function matrixattractor(ifs::AbstractVector{<:Function}, xs::AbstractVector{<:R
   # Cheking weights (probabilites) array
   if length(weights) > 0
     if length(weights) != length(ifs) && !checkindex(weights)
-      @error "Non-suitable weights vec  tor."
+      @error "Non-suitable weights vector."
     end
   end
 
@@ -111,6 +111,58 @@ function Makie.plot!(
   heatmap!(plt, obs_xs, obs_ys,
       matrixattractor(ifs, xs, ys, weights = ws, seed = sd,
         iterations = nits, preiterations = npits);
+      plt.attributes.attributes...)
+  
+  plt
+end
+
+
+"""
+    plotimgattractor(ifs, xs, ys; kwargs)
+
+Plot an IFS attractor using the "Chaos Game" algorithm, extending the Makie's `image`.
+
+## Attributes
+  weights
+  seed
+  iterations
+  preiterations
+"""
+@recipe(PlotImgAttractor) do scene
+  Attributes(
+    weights = Float64[],
+    seed = nothing,
+    iterations = 10000,
+    preiterations = 100
+  )
+end
+
+function Makie.plot!(
+  plt::PlotImgAttractor{<:Tuple{AbstractVector{<:Function},
+  AbstractVector{<:Real}, AbstractVector{<:Real}}})
+
+  # Recipe attributes
+  ifs = plt[1][] # IFS, array of functions
+  obs_xs = plt[2] 
+  xs = obs_xs[]
+  obs_ys = plt[3]
+  ys = obs_ys[]
+
+  # Plot keyword arguments
+  ws = plt.weights[]
+  sd = plt.seed[]
+  nits = plt.iterations[]
+  npits = plt.preiterations[]
+ 
+  nfs = length(ifs)  
+  pltcm = plt.colormap[]
+  cm = typeof(pltcm) == Symbol ? colorschemes[pltcm] : ColorScheme(pltcm)
+  colors = [ cm[k/nfs] for k in 0:nfs ]
+
+  image!(plt, obs_xs, obs_ys,
+      matrixattractor(ifs, xs, ys, weights = ws, seed = sd,
+        iterations = nits, preiterations = npits,
+        value = k::Int -> colors[k+1]);
       plt.attributes.attributes...)
   
   plt

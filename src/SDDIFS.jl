@@ -8,12 +8,12 @@ module SDDIFS
 using Reexport
 
 @reexport using SDDCore, SDDGeometry, StaticArrays, Colors, ColorSchemes, Images, Makie
-#, SDDGraphics
+#, SDDGraphics # Deprecated!!!
 
 
-#include("IFSs.jl") # Deprecated!!!!
+#include("IFSs.jl") # Deprecated!!!
 
-#export
+#export # Deprecated!!!
     #AbstractIFS,
     #AbstractIFSComplex,
     #IFSComplex,
@@ -42,7 +42,9 @@ export
     imgattractor,
     #PlotAttractor,
     plotattractor,
-    plotattractor!
+    plotattractor!,
+    plotimgattractor,
+    plotimgattractor!
     #plotattractor3D, # Trabajo de Edgar
     #plotattractor3D! # Trabajo de Edgar
 
@@ -50,12 +52,15 @@ export
 include("densitymaps.jl")
 
 export
+    imgdensitymap, # Trabajo de Linda
+    plotdensitymap, # Trabajo de Linda
+    plotdensitymap!, # Trabajo de Linda
+    plotimgdensitymap, # Trabajo de Linda
+    plotimgdensitymap!, # Trabajo de Linda
+    imgstructuraldensitymap, # Trabajo de Linda
+#    plotstructuraldensitymap, # Trabajo de Linda
     plotdensitymap3d,
     plotdensitymap3d!
-#    imgdensitymap, # Trabajo de Linda
-#    plotdensitymap, # Trabajo de Linda
-#    imgstructuraldensitymap, # Trabajo de Linda
-#    plotstructuraldensitymap, # Trabajo de Linda
 #    plotstructuraldensitymap3D # Es posible???    
 
 
