@@ -590,7 +590,7 @@ end
 
 
 """
-    imgstructuraldensitymap(ifs, xs, ys[; kwargs])
+    imgstructuraldensitymapff(ifs, xs, ys[; kwargs])
 
 Given an IFS
 
@@ -657,7 +657,7 @@ structural coloring and the density map technique. Fractal flame version.
 - `gamma::Real = 1.0`: Gamma correction parameter.
 - `usealpha::Bool = false`: Use alpha component.
 """
-@recipe(PlotImgStructuralDensityMap) do scene
+@recipe(PlotImgStructuralDensityMapFF) do scene
   Attributes(
     weights = Float64[],
     seed = nothing,
@@ -671,7 +671,7 @@ structural coloring and the density map technique. Fractal flame version.
 end
 
 function Makie.plot!(
-  plt::PlotImgStructuralDensityMap{<:Tuple{AbstractVector{<:Function},
+  plt::PlotImgStructuralDensityMapFF{<:Tuple{AbstractVector{<:Function},
   AbstractVector{<:Real}, AbstractVector{<:Real}}})
 
   # Recipe attributes
