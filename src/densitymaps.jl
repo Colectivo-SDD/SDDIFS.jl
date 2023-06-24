@@ -77,7 +77,7 @@ function matrixdensitymap(ifs::AbstractVector{<:Function},
   else
     for j in 1:h
       for i in 1:w
-        if densmtrx[j,i] > 1
+        if histogram[j,i] > 1
           mtrx[j,i] = value(scale(histogram[j,i])/snmax)
         end
       end
