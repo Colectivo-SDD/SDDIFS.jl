@@ -40,13 +40,16 @@ include("attractors.jl")
 
 export
     imgattractor,
-    #PlotAttractor,
+    plotimgattractor,
+    plotimgattractor!,
     plotattractor,
     plotattractor!,
-    plotimgattractor,
-    plotimgattractor!
-    #plotattractor3D, # Trabajo de Edgar
-    #plotattractor3D! # Trabajo de Edgar
+    plotscatterattractor,
+    plotscatterattractor!,
+    plotattractor3d, # Trabajo de Edgar
+    plotattractor3d!, # Trabajo de Edgar
+    plotscatterattractor3d, # Trabajo de Edgar
+    plotscatterattractor3d! # Trabajo de Edgar
 
 
 include("densitymaps.jl")
@@ -58,10 +61,15 @@ export
     plotimgdensitymap, # Trabajo de Linda
     plotimgdensitymap!, # Trabajo de Linda
     imgstructuraldensitymap, # Trabajo de Linda
-#    plotstructuraldensitymap, # Trabajo de Linda
-    plotdensitymap3d,
-    plotdensitymap3d!
-#    plotstructuraldensitymap3D # Es posible???    
+    plotimgstructuraldensitymap, # Trabajo de Linda
+#    plotstructuraldensitymap, # Imposible con heatmap!!!
+    imgstructuraldensitymapff, # Fractal Flame!
+    plotimgstructuraldensitymapff, # Fractal Flame!
+#    plotstructuraldensitymapff, # Imposible con heatmap!!!
+    plotdensitymap3d, 
+    plotdensitymap3d!,
+    plotstructuraldensitymap3d, # ???
+    plotstructuraldensitymap3d! # ???
 
 
 #include("distancemaps.jl")
@@ -70,6 +78,7 @@ export
 #    imgdistancemap,
 #    plotdistancemap,
 #    plotdistancemap3D # Trabajo de Edgar
+
 
 #include("fractaldimensions.jl")
 
