@@ -216,6 +216,12 @@ function Makie.plot!(
   nits = plt.iterations[]
   npits = plt.preiterations[]
   #bgc = plt.bgcolor[]
+
+  # Remove non Makie keyword arguments to avoid errors
+  delete!(plt.attributes.attributes, :seed)
+  delete!(plt.attributes.attributes, :weights)
+  delete!(plt.attributes.attributes, :iterations)
+  delete!(plt.attributes.attributes, :preiterations)
    
   heatmap!(plt, obs_xs, obs_ys,
       matrixattractor(ifs, xs, ys, weights = ws, seed = sd,
@@ -322,6 +328,13 @@ function Makie.plot!(plt::PlotScatterAttractor{<:Tuple{<:AbstractVector{<:Functi
     end
   end    
   ## end of "chaos game" algorithm
+
+  # Remove non Makie keyword arguments to avoid errors
+  delete!(plt.attributes.attributes, :seed)
+  delete!(plt.attributes.attributes, :weights)
+  delete!(plt.attributes.attributes, :iterations)
+  delete!(plt.attributes.attributes, :preiterations)
+  delete!(plt.attributes.attributes, :coloring)
 
   # Drawing the random orbit
   if typeof(pk) <: Number # Complex numbers points
@@ -430,7 +443,7 @@ function Makie.plot!(
 
     # Coloring function selection
     funclrdict = Dict(
-      :structural => (k::Int, n::Int) -> Float32(k/nfs),
+      :structural => (k::Int, n::Int) -> Float32(k),#,/nfs),
       :ordered => (k::Int, n::Int) -> Float32(n/nits),
       :random => (k::Int, n::Int) -> rand()
     )
@@ -463,6 +476,14 @@ function Makie.plot!(
     # Force first color to totally transparent
     cm = to_colormap(colormap)
     cm[1] = RGBAf(red(cm[1]), green(cm[1]), blue(cm[1]), 0)
+
+  # Remove non Makie keyword arguments to avoid errors
+  delete!(plt.attributes.attributes, :seed)
+  delete!(plt.attributes.attributes, :weights)
+  delete!(plt.attributes.attributes, :iterations)
+  delete!(plt.attributes.attributes, :preiterations)
+  delete!(plt.attributes.attributes, :coloring)
+  delete!(plt.attributes.attributes, :kind)
 
     if knd == :contour
         contour!(plt, obs_xs, obs_ys, obs_zs, cube; plt.attributes.attributes..., colormap = cm)
@@ -581,6 +602,14 @@ function Makie.plot!(plt::PlotScatterAttractor3D{<:Tuple{AbstractVector{<:Functi
   end
 
   ## end of "chaos game" algorithm
+
+  # Remove non Makie keyword arguments to avoid errors
+  delete!(plt.attributes.attributes, :seed)
+  delete!(plt.attributes.attributes, :weights)
+  delete!(plt.attributes.attributes, :iterations)
+  delete!(plt.attributes.attributes, :preiterations)
+  delete!(plt.attributes.attributes, :coloring)
+  delete!(plt.attributes.attributes, :usemesh)
 
   # Drawing the random orbit
   if umsh == true

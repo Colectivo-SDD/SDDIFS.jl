@@ -7,7 +7,8 @@ module SDDIFS
 
 using Reexport
 
-@reexport using SDDCore, SDDGeometry, StaticArrays, Colors, ColorSchemes, Images, Makie
+@reexport using SDDCore, SDDGeometry, StaticArrays, Colors, ColorSchemes, Makie
+using Images
 #, SDDGraphics # Deprecated!!!
 
 
@@ -68,8 +69,8 @@ export
 #    plotstructuraldensitymapff, # Imposible con heatmap!!!
     plotdensitymap3d, 
     plotdensitymap3d!,
-    plotstructuraldensitymap3d, # ???
-    plotstructuraldensitymap3d! # ???
+    plotstructuraldensitymap3d,
+    plotstructuraldensitymap3d!
 
 
 #include("distancemaps.jl")
